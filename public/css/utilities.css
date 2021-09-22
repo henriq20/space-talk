@@ -1,0 +1,51 @@
+/* Background colors */
+.bg-primary, .btn-primary {
+    background-color: #3772FF;
+}
+
+.bg-dark {
+    background-color: var(--color-dark);
+}
+
+.bg-light-dark {
+    background-color: var(--color-light-dark);
+}
+
+/* Shadows */
+.shadow-bottom {
+    box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.15);
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    cursor: pointer;
+    color: #FCFCFC;
+    transition: 200ms;
+}
+
+.btn-transparent {
+    background-color: transparent;
+}
+
+.btn-primary {
+    padding: 0 1.5rem;  
+    border-radius: var(--border-radius);
+}
+
+/* Hover/Active animations */
+.btn-primary:hover {
+    background-color: hsl(222, 100%, 55%);
+}
+
+.btn-primary:active {
+    background-color: hsl(222, 100%, 48%);
+}
+
+.btn-transparent:hover {
+    color: hsl(222, 100%, 55%);
+}
+
+.btn-transparent:active {
+    color: hsl(222, 100%, 48%);
+}
