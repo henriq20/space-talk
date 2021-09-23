@@ -4,7 +4,8 @@
     --color-primary: hsl(222, 100%, 61%);
     --color-dark: hsl(244, 16%, 17%);
     --color-light-dark: hsl(244, 17%, 22%);
-    --border-radius: 15px;
+    --color-white: hsl(0, 0%, 99%);
+    --border-radius: 8px;
 }
 
 * {
@@ -25,6 +26,10 @@ a {
     text-decoration: none;
 }
 
+p {
+    color: #646187;
+}
+
 ul {
     list-style-type: none;
 }
@@ -32,6 +37,15 @@ ul {
 input {
     outline: none;
     border: none;
+}
+
+label {
+    margin-bottom: 0.2rem;
+}
+
+input, label, p {
+    font-size: 1rem;
+    font-weight: 600;
 }
 
 .container {
@@ -111,6 +125,77 @@ input {
 #navbar ul li a {
     display: flex;
     align-items: center;
+}
+
+/* Register Form */
+main.flex-columns {
+    height: 100vh;
+}
+
+/* Register Form - Images */
+.flex-columns .column .space {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.flex-columns .column .logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5%;
+    margin: 1rem 0 0 1rem;
+}
+
+.flex-columns .column .logo img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Register Form - 2° Column */
+.flex-columns .column:last-child {
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+}
+
+.flex-columns .column form {
+    grid-column: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.flex-columns .column form h1 {
+    font-size: 2.5rem;
+}
+
+.flex-columns .column form p {
+    margin-bottom: 3rem;
+}
+
+.flex-columns .column form label {
+    text-align: left;
+}
+
+.flex-columns .column form > div {
+    display: flex;
+}
+
+.flex-columns .column form > div > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.flex-columns .column form > div > div:first-child {
+    margin-right: 1rem;
+}
+
+.flex-columns .column form input {
+    margin-bottom: 1.2rem;
+}
+
+.flex-columns .column form input.btn {
+    height: 45px;
 }
 
 ::placeholder {

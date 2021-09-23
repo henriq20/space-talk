@@ -1,3 +1,23 @@
+/* Flex Columns */
+.flex-columns {
+    display: flex;
+}
+
+.flex-columns .column {
+    display: flex;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+}
+
+.flex-columns .column:first-child {
+    flex: 1;
+}
+
+.flex-columns .column:last-child {
+    flex: 1.5;
+}
+
 /* Background colors */
 .bg-primary, .btn-primary {
     background-color: #3772FF;
@@ -14,6 +34,20 @@
 /* Shadows */
 .shadow-bottom {
     box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.15);
+}
+
+/* Input */
+.text-input {
+    display: block;
+    width: 100%;
+    min-height: 45px;
+    transition: 200ms;
+    padding: 0 15px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    color: var(--color-white);
+    border-radius: var(--border-radius);
+    background-color: var(--color-light-dark);
 }
 
 /* Buttons */
@@ -33,7 +67,19 @@
     border-radius: var(--border-radius);
 }
 
-/* Hover/Active animations */
+.text-input-hover-animation {
+    transition: 100ms;
+    border: 1px solid hsl(244, 17%, 28%);
+    box-shadow: 0 0 0 4px hsla(244, 17%, 28%, 0.2);
+}
+
+.text-input-focus-animation {
+    transition: 100ms;
+    border: 1px solid hsl(222, 100%, 55%);
+    box-shadow: 0 0 0 4px hsla(222, 100%, 55%, 0.1);
+}
+
+/* Hover/Active/Focus animations */
 .btn-primary:hover {
     background-color: hsl(222, 100%, 55%);
 }
