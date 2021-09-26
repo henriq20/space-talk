@@ -7,6 +7,7 @@
     --color-white: hsl(0, 0%, 99%);
     --color-red: hsl(360, 82%, 63%);
     --border-radius: 8px;
+    --color-green: #53ED7F;
 }
 
 * {
@@ -224,6 +225,17 @@ input, label {
     animation: slide-down 300ms ease-out forwards;
 }
 
+.flash-message {
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    animation: slide-down 300ms ease-out, slide-up 300ms ease-in 3700ms forwards;
+}
+
 @keyframes slide-down {
     from {
         opacity: 0;
@@ -232,5 +244,16 @@ input, label {
     to {
         opacity: 1;
         transform: translateY(0%);
+    }
+}
+
+@keyframes slide-up {
+    from {
+        opacity: 1;
+        transform: translateY(0%);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-100%);
     }
 }

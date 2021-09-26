@@ -11,6 +11,10 @@
     background-color: var(--color-light-dark);
 }
 
+.bg-success {
+    background-color: #53ED7F;
+}
+
 /* Shadows */
 .b-shadow {
     box-shadow: 0 5px 10px hsla(0, 0%, 0%, 0.15);

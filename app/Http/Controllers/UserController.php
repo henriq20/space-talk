@@ -17,6 +17,7 @@ class UserController extends Controller
         $user = new User($request->input());
         $user->save();
 
-        return redirect('/login');
+        return redirect('/login')->
+               with('register_success', 'Your account has been created! You can now log in :)');
     }
 }

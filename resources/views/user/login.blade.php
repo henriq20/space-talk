@@ -1,4 +1,9 @@
 @include('inc.header')
+@if (session('register_success'))
+    <div class="flash-message bg-success" id="js-flash-message">
+        {{ session('register_success') }}
+    </div>
+@endif
 <main id="auth" class="flex-columns">
     <aside class="r-shadow">
         <img src="img/milky-way.png" class="space" alt="An illustration of two astronauts watching the space through a window inside a spaceship">
