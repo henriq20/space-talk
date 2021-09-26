@@ -2,6 +2,9 @@
 <main id="auth" class="flex-columns">
     <aside class="r-shadow">
         <img src="img/space.png" class="space" alt="An illustration of two astronauts watching the space through a window inside a spaceship">
+        <div class="author">  
+            By <a href="https://dribbble.com/shots/14693095-Travelers" target="_blank" class="btn btn-transparent">Marko Stupic</a>
+        </div>
         @include('inc.logo')
     </aside>
     <div class="content bg-dark">

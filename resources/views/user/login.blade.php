@@ -7,6 +7,9 @@
 <main id="auth" class="flex-columns">
     <aside class="r-shadow">
         <img src="img/milky-way.png" class="space" alt="An illustration of two astronauts watching the space through a window inside a spaceship">
+        <div class="author">  
+            By <a href="https://dribbble.com/shots/2212776-The-Milky-Way-Galaxy" target="_blank" class="btn btn-transparent">Aiden Guinnip</a>
+        </div>
         @include('inc.logo')
     </aside>
     <div class="content bg-dark">

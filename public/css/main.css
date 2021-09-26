@@ -236,6 +236,19 @@ input, label {
     animation: slide-down 300ms ease-out, slide-up 300ms ease-in 3700ms forwards;
 }
 
+.author {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0 0 1rem 1rem;
+}
+
+.author a {
+    color: var(--color-primary);
+    min-height: 0;
+}
+
 @keyframes slide-down {
     from {
         opacity: 0;
