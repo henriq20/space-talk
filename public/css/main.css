@@ -161,9 +161,9 @@ input, label {
 
 /* Auth - Content */
 #auth > .content {
-    flex: 2; 
+    flex: 2;
     margin: auto 0;
-    padding: 0 2rem;
+    padding: 2rem 2rem;
 }
 
 /* Auth - Content - Top/Right Link */

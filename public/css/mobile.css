@@ -2,6 +2,14 @@
     display: none;
 }
 
+#auth .content form input[type="submit"] {
+    width: 100%;
+}
+
+#auth .content {
+    margin-top: 3rem;
+}
+
 @media screen and (max-width: 500px) {
     .group-field {
         flex-wrap: wrap;
