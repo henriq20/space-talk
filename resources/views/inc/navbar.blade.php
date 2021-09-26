@@ -1,9 +1,6 @@
-<nav id="navbar" class="shadow-bottom bg-dark">
+<nav id="navbar" class="b-shadow bg-dark">
     <div class="container">
-        <div class="logo">
-            <img src="img/logo.png" alt="An illustration of the Milky Way">
-            <span>SpaceTalk</span>
-        </div>
+        @include('inc.logo')
         <form action="/search" method="GET" class="search bg-light-dark">
             <i class="fas fa-search"></i>
             <input type="text" name="query" placeholder="Search Posts">

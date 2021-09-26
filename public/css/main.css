@@ -5,6 +5,7 @@
     --color-dark: hsl(244, 16%, 17%);
     --color-light-dark: hsl(244, 17%, 22%);
     --color-white: hsl(0, 0%, 99%);
+    --color-red: hsl(360, 82%, 63%);
     --border-radius: 8px;
 }
 
@@ -19,15 +20,16 @@
 }
 
 body {
-    color: #fff;
+    color: var(--color-white);
 }
 
 a {
     text-decoration: none;
+    color: var(--color-primary);
 }
 
-p {
-    color: #646187;
+h1 {
+    font-size: 2.2rem;
 }
 
 ul {
@@ -43,7 +45,7 @@ label {
     margin-bottom: 0.2rem;
 }
 
-input, label, p {
+input, label {
     font-size: 1rem;
     font-weight: 600;
 }
@@ -66,8 +68,12 @@ input, label, p {
 .logo span {
     margin-left: 12px;
     font-weight: 700;
-    font-size: 17px;
+    font-size: 1.1rem;
     color: #E1F1FF;
+}
+
+.logo:hover {
+    filter: brightness(110%);
 }
 
 #navbar {
@@ -127,77 +133,104 @@ input, label, p {
     align-items: center;
 }
 
-/* Register Form */
-main.flex-columns {
+/* Auth */
+#auth {
+    display: flex;
     height: 100vh;
 }
 
-/* Register Form - Images */
-.flex-columns .column .space {
+/* Auth - Aside and Images */
+#auth > aside {
+    flex: 1.2;
+}
+
+#auth > aside img {
     width: 100%;
     height: 100%;
     object-fit: cover;
 }
 
-.flex-columns .column .logo {
+#auth > aside .logo {
     position: absolute;
     top: 0;
     left: 0;
-    height: 5%;
+    height: 7%;
     margin: 1rem 0 0 1rem;
 }
 
-.flex-columns .column .logo img {
-    width: 100%;
-    height: 100%;
+/* Auth - Content */
+#auth > .content {
+    flex: 2; 
+    margin: auto 0;
+    padding: 0 2rem;
 }
 
-/* Register Form - 2° Column */
-.flex-columns .column:last-child {
-    display: grid;
-    grid-template-columns: 20% 60% 20%;
+/* Auth - Content - Top/Right Link */
+#auth > .content > p {
+    position: absolute;
+    top: 0;
+    right: 0;
+    margin: 2rem 2rem 0 0;
 }
 
-.flex-columns .column form {
-    grid-column: 2;
-    display: flex;
-    flex-direction: column;
+#auth > .content > p > a:hover {
+    transition: 100ms;
+    color: hsl(222, 100%, 65%);
 }
 
-.flex-columns .column form h1 {
-    font-size: 2.5rem;
+/* Auth - Content - Form */
+#auth > .content > form {
+    max-width: 500px;
+    margin: 0 auto;
 }
 
-.flex-columns .column form p {
+#auth > .content > form > h1,
+#auth > .content > form > p {
+    text-align: center;
+}
+
+#auth > .content > form > p {
     margin-bottom: 3rem;
-}
-
-.flex-columns .column form label {
-    text-align: left;
-}
-
-.flex-columns .column form > div {
-    display: flex;
-}
-
-.flex-columns .column form > div > div {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-}
-
-.flex-columns .column form > div > div:first-child {
-    margin-right: 1rem;
-}
-
-.flex-columns .column form input {
-    margin-bottom: 1.2rem;
-}
-
-.flex-columns .column form input.btn {
-    height: 45px;
+    color: #646187;
 }
 
 ::placeholder {
     color: #646187;
+}
+
+.group-field {
+    display: flex;
+    margin: 0 -1rem;
+}
+
+.group-field > .field {
+    padding: 0 1rem;
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 1.2rem;
+    width: 100%;
+}
+
+.is-invalid {
+    border: 1px solid var(--color-red) !important;
+}
+
+.error-message {
+    margin-top: 4px;
+    color: var(--color-red);
+    animation: slide-down 300ms ease-out forwards;
+}
+
+@keyframes slide-down {
+    from {
+        opacity: 0;
+        transform: translateY(-25%);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0%);
+    }
 }
