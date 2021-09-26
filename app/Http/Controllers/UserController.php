@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\RegisterRequest;
-use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -14,6 +14,9 @@ class UserController extends Controller
 
     public function store(RegisterRequest $request)
     {
-        
+        $user = new User($request->input());
+        $user->save();
+
+        return redirect('/login');
     }
 }
