@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
+use Illuminate\Validation\Validator;
 
 class RegisterRequest extends FormRequest
 {
@@ -42,4 +43,18 @@ class RegisterRequest extends FormRequest
             'confirm_password.same' => "The passwords don't match"
         ];
     }
+
+    // public function withValidator(Validator $validator)
+    // {
+    //     // // Returns an empty JSON if the request is an AJAX call.
+    //     // if ($request->wantsJson() || $request->ajax()) {
+    //     //     return response()->json();
+    //     // }
+
+    //     // $validator->after(function () {    
+    //     //     if ($this->wantsJson() || $this->ajax()) {
+    //     //         return response()->json();
+    //     //     }
+    //     // });
+    // }
 }

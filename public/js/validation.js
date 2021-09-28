@@ -1,3 +1,5 @@
+/// <reference path="../../typings/globals/jquery/index.d.ts" />
+
 const form = document.querySelector('form');
 
 document.getElementById('js-validate-inputs').addEventListener('click', validateInputs);
@@ -8,17 +10,21 @@ function validateInputs(e) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', location.href, true);
     xhr.setRequestHeader('Accept', 'application/json');
+    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
     xhr.onload = function () {
-        if (this.status === 422) {
+        if (hasErrors(this.responseText)) {
             displayErrors(JSON.parse(this.responseText).errors);
-        }
-        if (this.status === 200) {
+        } else {
             form.submit();
         }
     };
 
     xhr.send(new FormData(form));
+}
+
+function hasErrors(responseText) {
+    return responseText !== '[]';
 }
 
 function displayErrors(errors = {}) {
