@@ -13,5 +13,6 @@ posts.forEach(post => {
 function truncate(element, length) {
     if (element.innerText.length > length) {
         element.innerText = element.innerText.slice(0, 1000);
+        element.classList.add('text-opacity');
     }
 }

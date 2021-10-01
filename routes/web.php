@@ -16,12 +16,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// Post routes
 Route::get('/', [PostController::class, 'index']);
+Route::get('/posts/show/{post}', [PostController::class, 'show']);
 
-Route::post('/posts/store', [PostController::class, 'store']);
-Route::view('/posts/create', 'posts.create');
-Route::view('/login', 'users.login');
-Route::view('/register', 'users.register');
+Route::view('/posts/create', 'posts.create')->middleware('auth');
+Route::post('/posts/store', [PostController::class, 'store'])->middleware('auth');
+
+// Login/Register routes
+Route::view('/login', 'users.login')->name('login');
+Route::view('/register', 'users.register')->name('register');
 
 Route::post('/login', [UserController::class, 'authenticate']);
 Route::post('/logout', [UserController::class, 'logout']);

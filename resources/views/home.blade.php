@@ -10,10 +10,12 @@
         </div>
     @endif
     <main class="container">
-        <div class="row">
-            <a href="/posts/create" class="btn btn-primary">New Post</a>
-        </div>
-        <hr>
+        @auth
+            <div class="row">
+                <a href="/posts/create" class="btn btn-primary">New Post</a>
+            </div>
+            <hr>
+        @endauth
         @foreach ($posts as $post)
             <section id="post" class="bg-dark-lighter">
                 <aside>
@@ -28,15 +30,14 @@
                     <div class="author">
                         <img src="/img/user-one.jpg" class="author-picture">
                         <p class="text-dark">
-                            Posted By <span class="author-name">{{ $post->user->first_name }}</span> {{ $post->created_at->diffForHumans() }}
+                            Posted By <span class="author-name">{{ $post->user->username }}</span> {{ $post->created_at->diffForHumans() }}
                         </p>
                     </div>
                     <hr>
-                    <div class="content">
+                    <a href="/posts/show/{{ $post->id }}" class="content text-white">
                         <h2>{{ $post->title }}</h2>
                         <p class="text-dark">{{ $post->body }}</p>
-                        <script src="/js/home.js"></script>
-                    </div>
+                    </a>
                     <footer>
                         <i class="fas fa-comments text-dark"></i>
                         <span class="comments">500</span>
@@ -45,4 +46,6 @@
             </section>
         @endforeach
     </main>
+
+    <script src="/js/home.js"></script>
 @endsection

@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 :root {
     --border-radius: 12px;
@@ -38,6 +39,11 @@ body {
 a {
     text-decoration: none;
     color: hsl(var(--color-primary));
+}
+
+p {
+    line-height: 1.5rem;
+    font-family: 'Inter', sans-serif;
 }
 
 h1 {
@@ -250,7 +256,13 @@ main.container {
     width: 100%;
     padding: 1.5rem;
     margin-bottom: 1rem;
+    border: 1px solid transparent;
     border-radius: var(--border-radius);
+    transition: border 200ms;
+}
+
+#post:hover {
+    border: 1px solid hsl(var(--color-dark-lightest));
 }
 
 #post aside {
@@ -314,6 +326,10 @@ main.container {
 }
 
 /* Post - Main - Content */
+#post main a.content {
+    cursor: pointer;
+}
+
 #post main .content h2 {
     font-size: 1.8rem;
     margin-bottom: 0.2rem;
@@ -323,12 +339,8 @@ main.container {
     position: relative;
 }
 
-#post main .content p::before {
-    content: '';
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    background: linear-gradient(transparent 75px , hsl(var(--color-dark-lighter)));
+#post main .content p.text-white {
+    color: hsl(0, 0%, 85%) !important;
 }
 
 #post footer {
@@ -411,6 +423,15 @@ main.container {
 a.btn.btn-primary {
     display: flex;
     align-items: center;
+}
+
+.text-opacity::before {
+    content: '';
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    pointer-events: none;
+    background: linear-gradient(transparent 75px , hsl(var(--color-dark-lighter)));
 }
 
 .group-field {
