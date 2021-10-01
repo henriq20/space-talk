@@ -1,6 +1,4 @@
-/// <reference path="../../typings/globals/jquery/index.d.ts" />
-
-const form = document.querySelector('form');
+const form = document.getElementById('validate-form');
 
 document.getElementById('js-validate-inputs').addEventListener('click', validateInputs);
 
@@ -8,7 +6,7 @@ function validateInputs(e) {
     e.preventDefault();
 
     let xhr = new XMLHttpRequest();
-    xhr.open('POST', location.href, true);
+    xhr.open('POST', form.getAttribute('action'), true);
     xhr.setRequestHeader('Accept', 'application/json');
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
@@ -28,7 +26,7 @@ function hasErrors(responseText) {
 }
 
 function displayErrors(errors = {}) {
-    form.querySelectorAll('input.text-input').forEach(input => {
+    form.querySelectorAll('.text-input').forEach(input => {
         let errorMessage = errors[input.name];
 
         if (errorMessage !== undefined) {

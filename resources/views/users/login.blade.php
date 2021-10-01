@@ -10,15 +10,15 @@
     @endif
     <main id="auth" class="flex-columns">
         <aside class="r-shadow">
-            <img src="img/milky-way.png" class="space" alt="An illustration of the Milky Way galaxy">
-            <div class="author">
+            <img src="/img/milky-way.png" class="space" alt="An illustration of the Milky Way galaxy">
+            <div class="attribution">
                 By <a href="https://dribbble.com/shots/2212776-The-Milky-Way-Galaxy" target="_blank" class="btn btn-transparent">Aiden Guinnip</a>
             </div>
             @include('inc.logo')
         </aside>
         <div class="content">
             <p>Not a member? <a href="/register">Sign Up</a></p>
-            <form action="/login" method="POST" id="form">
+            <form action="/login" method="POST" id="validate-form">
                 @csrf
                 <h1>Log In</h1>
                 <p>The best place to talk about our vast universe.</p>
@@ -37,7 +37,7 @@
 
                 <input type="submit" class="btn btn-primary" id="js-validate-inputs" value="Log In">
 
-                <script src="js/validation.js"></script>
+                <script src="/js/validation.js"></script>
             </form>
         </div>
     </main>

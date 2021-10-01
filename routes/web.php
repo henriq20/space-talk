@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,9 +16,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/', 'home');
-Route::view('/login', 'user.login');
-Route::view('/register', 'user.register');
+Route::get('/', [PostController::class, 'index']);
+
+Route::post('/posts/store', [PostController::class, 'store']);
+Route::view('/posts/create', 'posts.create');
+Route::view('/login', 'users.login');
+Route::view('/register', 'users.register');
 
 Route::post('/login', [UserController::class, 'authenticate']);
 Route::post('/logout', [UserController::class, 'logout']);

@@ -5,7 +5,7 @@
 @section('content')
     <main id="auth" class="flex-columns">
         <aside class="r-shadow">
-            <img src="img/space.png" class="space" alt="An illustration of two astronauts watching the space through a window inside a spaceship">
+            <img src="/img/space.png" class="space" alt="An illustration of two astronauts watching the space through a window inside a spaceship">
             <div class="author">  
                 By <a href="https://dribbble.com/shots/14693095-Travelers" target="_blank" class="btn btn-transparent">Marko Stupic</a>
             </div>
@@ -13,7 +13,7 @@
         </aside>
         <div class="content">
             <p>Already have an account? <a href="/login">Log in</a></p>
-            <form action="/register" method="POST" id="form">
+            <form action="/register" method="POST" id="validate-form">
                 @csrf
                 <h1>Sign Up</h1>
                 <p>Join us and share your thoughts, discover more, learn, and have fun!</p>
@@ -50,7 +50,7 @@
 
                 <input type="submit" class="btn btn-primary" id="js-validate-inputs" value="Create Account">
 
-                <script src="js/validation.js"></script>
+                <script src="/js/validation.js"></script>
             </form>
         </div>
     </main>
