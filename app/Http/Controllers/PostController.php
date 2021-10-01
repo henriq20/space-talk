@@ -58,12 +58,12 @@ class PostController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  Post  $post
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Post $post)
     {
-        //
+        return view('posts.edit', ['post' => $post]);
     }
 
     /**
@@ -75,7 +75,20 @@ class PostController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'title' => 'required|max:255',
+            'body' => 'required'
+        ]);
+
+        if ($request->wantsJson() || $request->ajax()) {
+            return response()->json();
+        }
+
+        $post = Post::find($id);
+        $post = $post->fill($request->input());
+        $post->save();
+
+        return redirect('/');
     }
 
     /**
@@ -86,6 +99,9 @@ class PostController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+        $post->delete();
+
+        return back();
     }
 }

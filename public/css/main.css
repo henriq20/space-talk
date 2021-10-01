@@ -41,9 +41,8 @@ a {
     color: hsl(var(--color-primary));
 }
 
-p {
+p, pre {
     line-height: 1.5rem;
-    font-family: 'Inter', sans-serif;
 }
 
 h1 {
@@ -305,6 +304,33 @@ main.container {
 }
 
 /* Post - Main */
+#post main header {
+    display: flex;
+    justify-content: space-between;
+}
+
+#post main header .actions {
+    display: flex;
+}
+
+#post main header .actions a {
+    display: flex;
+    align-items: center;
+}
+
+#post main header .actions .btn {
+    height: 100%;
+    margin-left: 0.5rem;
+}
+
+#post main header .actions a:hover {
+    background-color: hsl(var(--color-primary));
+}
+
+#post main header .actions input:hover {
+    background-color: hsl(var(--color-danger));
+}
+
 #post main .author {
     display: flex;
     align-items: center;
@@ -326,6 +352,10 @@ main.container {
 }
 
 /* Post - Main - Content */
+#post main .content pre {
+    white-space: pre-wrap;
+}
+
 #post main a.content {
     cursor: pointer;
 }
@@ -335,12 +365,13 @@ main.container {
     margin-bottom: 0.2rem;
 }
 
-#post main .content p {
-    position: relative;
+#post main .content p,
+#post main .content pre {
+    font-family: 'Inter', sans-serif;
 }
 
-#post main .content p.text-white {
-    color: hsl(0, 0%, 85%) !important;
+#post main .content pre {
+    color: hsl(0, 0%, 85%);
 }
 
 #post footer {

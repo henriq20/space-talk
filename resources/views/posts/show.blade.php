@@ -26,7 +26,7 @@
                 <hr>
                 <div class="content">
                     <h2>{{ $post->title }}</h2>
-                    <p class="text-white">{{ $post->body }}</p>
+                    <pre>{{ $post->body }}</pre>
                 </div>
                 <footer>
                     <i class="fas fa-comments text-dark"></i>

@@ -5,6 +5,8 @@ if (flashMessage !== null) {
     removeFlashMessage();
 }
 
+textAreas.forEach(textArea => fitContent(textArea));
+
 textAreas.forEach(textArea => textArea.addEventListener('keyup', () => {
     fitContent(textArea);
 }));

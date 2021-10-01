@@ -27,12 +27,26 @@
                     </form>
                 </aside>
                 <main>
-                    <div class="author">
-                        <img src="/img/user-one.jpg" class="author-picture">
-                        <p class="text-dark">
-                            Posted By <span class="author-name">{{ $post->user->username }}</span> {{ $post->created_at->diffForHumans() }}
-                        </p>
-                    </div>
+                    <header>
+                        <div class="author">
+                            <img src="/img/user-one.jpg" class="author-picture">
+                            <p class="text-dark">
+                                Posted By <span class="author-name">{{ $post->user->username }}</span> {{ $post->created_at->diffForHumans() }}
+                            </p>             
+                        </div>
+                        @auth
+                            @if (auth()->id() === $post->user_id)
+                                <div class="actions">
+                                    <a href="/posts/edit/{{ $post->id }}" class="btn btn-dark">Edit</a>
+                                    <form action="/posts/destroy/{{ $post->id }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <input type="submit" class="btn btn-dark" value="Delete">
+                                    </form>
+                                </div>
+                            @endif
+                        @endauth
+                    </header>
                     <hr>
                     <a href="/posts/show/{{ $post->id }}" class="content text-white">
                         <h2>{{ $post->title }}</h2>

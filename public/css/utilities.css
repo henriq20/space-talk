@@ -11,6 +11,10 @@
     background-color: hsl(var(--color-dark-lighter));
 }
 
+.bg-dark-lightest, .btn-dark {
+    background-color: hsl(var(--color-dark-lightest));
+}
+
 .bg-success {
     background-color: hsl(var(--color-success));
 }
@@ -70,6 +74,11 @@ textarea.text-input {
 .btn-primary {
     height: 45px;
     padding: 0 1.5rem;  
+    border-radius: var(--border-radius);
+}
+
+.btn-dark {
+    padding: 0 1.2rem;
     border-radius: var(--border-radius);
 }
 

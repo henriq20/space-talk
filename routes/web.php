@@ -19,9 +19,12 @@ use Illuminate\Support\Facades\Route;
 // Post routes
 Route::get('/', [PostController::class, 'index']);
 Route::get('/posts/show/{post}', [PostController::class, 'show']);
+Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->middleware('auth');
 
 Route::view('/posts/create', 'posts.create')->middleware('auth');
 Route::post('/posts/store', [PostController::class, 'store'])->middleware('auth');
+Route::put('/posts/update/{id}', [PostController::class, 'update'])->middleware('auth');
+Route::delete('/posts/destroy/{id}', [PostController::class, 'destroy'])->middleware('auth');
 
 // Login/Register routes
 Route::view('/login', 'users.login')->name('login');
