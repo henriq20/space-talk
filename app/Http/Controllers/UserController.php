@@ -24,7 +24,7 @@ class UserController extends Controller
 
             $request->session()->regenerate();
 
-            return back();
+            return redirect()->intended();
         }
 
         return response()->json([

@@ -15,10 +15,11 @@ class PostController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $posts = Post::all();
-        return view('home', ['posts' => $posts]);
+        $q = $request->query('q');
+
+        return view('home', ['posts' => $q ? Post::search($q) : Post::all()]);
     }
 
     /**

@@ -17,4 +17,13 @@ class Post extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function scopeSearch($query, $value)
+    {
+        $escapedValue = str_replace(['%', '_'], ['\%', '\_'], $value);
+
+        return $query->where('title', 'LIKE', "%$escapedValue%")
+                     ->orWhere('tags', 'LIKE', "%$escapedValue%")
+                     ->get();
+    }
 }

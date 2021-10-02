@@ -313,14 +313,10 @@ main.container {
     display: flex;
 }
 
-#post main header .actions a {
-    display: flex;
-    align-items: center;
-}
-
 #post main header .actions .btn {
     height: 100%;
     margin-left: 0.5rem;
+    border-radius: 8px;
 }
 
 #post main header .actions a:hover {
@@ -337,7 +333,7 @@ main.container {
 }
 
 #post main .author .author-picture {
-    height: 35px;
+    height: 30px;
     width: auto;
     border-radius: 50%;
     margin-right: 0.5rem;
@@ -451,7 +447,7 @@ main.container {
     color: hsl(var(--color-text-dark));
 }
 
-a.btn.btn-primary {
+a.btn {
     display: flex;
     align-items: center;
 }

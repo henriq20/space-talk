@@ -1,8 +1,8 @@
 <?php
 
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\VoteController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,13 +18,15 @@ use Illuminate\Support\Facades\Route;
 
 // Post routes
 Route::get('/', [PostController::class, 'index']);
-Route::get('/posts/show/{post}', [PostController::class, 'show']);
-Route::get('/posts/edit/{post}', [PostController::class, 'edit'])->middleware('auth');
 
-Route::view('/posts/create', 'posts.create')->middleware('auth');
-Route::post('/posts/store', [PostController::class, 'store'])->middleware('auth');
-Route::put('/posts/update/{id}', [PostController::class, 'update'])->middleware('auth');
-Route::delete('/posts/destroy/{id}', [PostController::class, 'destroy'])->middleware('auth');
+Route::group(['prefix' => '/posts', 'middleware' => ['auth']], function () {
+    Route::get('/show/{post}', [PostController::class, 'show'])->withoutMiddleware('auth');
+    Route::delete('/destroy/{id}', [PostController::class, 'destroy']);
+    Route::put('/update/{id}', [PostController::class, 'update']);
+    Route::get('/edit/{post}', [PostController::class, 'edit']);
+    Route::post('/store', [PostController::class, 'store']);
+    Route::view('/create', 'posts.create');
+});
 
 // Login/Register routes
 Route::view('/login', 'users.login')->name('login');

@@ -1,9 +1,9 @@
 <nav id="navbar" class="b-shadow bg-dark">
     <div class="container">
         @include('inc.logo')
-        <form action="/search" method="GET" class="search bg-dark-lighter">
+        <form action="/" method="GET" class="search bg-dark-lighter">
             <i class="fas fa-search"></i>
-            <input type="text" name="query" placeholder="Search Posts">
+            <input type="text" name="q" placeholder="Search Posts">
         </form>
         <div class="navbar-links">
             @auth
