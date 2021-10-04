@@ -13,9 +13,9 @@ class Post extends Model
         'tags'
     ];
 
-    public function user()
+    public function author()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function scopeSearch($query, $value)

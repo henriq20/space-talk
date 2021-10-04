@@ -8,7 +8,7 @@
         <div id="card">
             <h1>Edit Post</h1>
             <hr>
-            <form action="/posts/update/{{ $post->id }}" method="POST" id="validate-form">
+            <form action="/posts/{{ $post->id }}" method="POST" id="validate-form">
                 @method('PUT')
                 @csrf
                 <div class="field">

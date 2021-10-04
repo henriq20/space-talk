@@ -250,138 +250,143 @@ main.container {
 }
 
 /* Post */
-#post {
+.post {
     display: flex;
     width: 100%;
     padding: 1.5rem;
     margin-bottom: 1rem;
-    border: 1px solid transparent;
     border-radius: var(--border-radius);
+}
+
+.post-summary {
+    cursor: pointer;
+    border: 1px solid transparent;
     transition: border 200ms;
 }
 
-#post:hover {
+.post-summary:hover {
     border: 1px solid hsl(var(--color-dark-lightest));
 }
 
-#post aside {
+.post aside {
     margin-right: 1.5rem;
 }
 
-#post aside form {
+.post aside form {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-#post aside .votes {
+.post aside .votes {
     font-weight: 600;
     margin: 0.2rem 0;
 }
 
 /* Post - Arrows */
-#post aside .btn {
+.post aside .btn {
     font-size: 1.8rem;
     width: 2.2rem;
     height: 2.2rem;
     border-radius: 50%;
 }
 
-#post aside .btn,
-#post aside .fas {
+.post aside .btn,
+.post aside .fas {
     transition: transform 200ms ease-out, color 200ms ease-out;
 }
 
 /* Post - Arrows' Hover Animation */
-#post aside .btn:hover .fa-arrow-up {
+.post aside .btn:hover .fa-arrow-up {
     transform: translateY(-8%);
     color: hsl(var(--color-primary)) !important;
 }
 
-#post aside .btn:hover .fa-arrow-down {
+.post aside .btn:hover .fa-arrow-down {
     transform: translateY(8%);
     color: hsl(var(--color-danger)) !important;
 }
 
 /* Post - Main */
-#post main header {
+.post main header {
     display: flex;
     justify-content: space-between;
 }
 
-#post main header .actions {
+.post main header .actions {
     display: flex;
 }
 
-#post main header .actions .btn {
+.post main header .actions .btn {
     height: 100%;
     margin-left: 0.5rem;
     border-radius: 8px;
 }
 
-#post main header .actions a:hover {
+.post main header .actions a:hover {
     background-color: hsl(var(--color-primary));
 }
 
-#post main header .actions input:hover {
+.post main header .actions input:hover {
     background-color: hsl(var(--color-danger));
 }
 
-#post main .author {
+.post main .author {
     display: flex;
     align-items: center;
 }
 
-#post main .author .author-picture {
+.post main .author .author-picture {
     height: 30px;
     width: auto;
     border-radius: 50%;
     margin-right: 0.5rem;
 }
 
-#post main .author .author-name {
-    color: hsl(var(--color-primary));
+.post main .author .author-name {
+    transition: color 200ms;    
 }
 
-#post main > hr {
+.post main .author .author-name:hover {
+    color: hsl(var(--color-primary-lightest));
+}
+
+.post main > hr {
     margin: 1rem 0;
 }
 
 /* Post - Main - Content */
-#post main .content pre {
+.post main .content pre {
     white-space: pre-wrap;
+    color: hsl(0, 0%, 85%);
 }
 
-#post main a.content {
-    cursor: pointer;
-}
-
-#post main .content h2 {
+.post main .content h2 {
     font-size: 1.8rem;
     margin-bottom: 0.2rem;
 }
 
-#post main .content p,
-#post main .content pre {
+.post main .content p {
+    position: relative;
+}
+
+.post main .content p,
+.post main .content pre {
     font-family: 'Inter', sans-serif;
 }
 
-#post main .content pre {
-    color: hsl(0, 0%, 85%);
-}
-
-#post footer {
+.post footer {
     display: flex;
     align-items: center;
     margin-top: 1rem;
 }
 
-#post footer > i {
+.post footer > i {
     font-size: 1.2rem;
     margin-right: 0.2rem;
 }
 
-#post footer > span {
+.post footer > span {
     font-weight: 600;
 }
 
@@ -428,18 +433,22 @@ main.container {
     flex-direction: column;
 }
 
-.dropdown-item + .dropdown-item {
-    margin-top: 0.5rem;
+.dropdown-item + * {
+    margin-top: 0.3rem;
 }
 
 .dropdown .dropdown-menu .dropdown-item {
+    cursor: pointer;
     font-weight: 600;
     padding: 0.4rem 0.8rem;
+    color: hsl(var(--color-text-dark));
     border-radius: var(--border-radius);
+    background-color: hsl(var(--color-dark));
+    transition: color 200ms, background-color 200ms;
 }
 
 .dropdown .dropdown-menu .dropdown-item:hover {
-    transition: 200ms;
+    color: hsl(var(--color-text-white));
     background-color: hsl(var(--color-dark-lighter));
 }
 
@@ -458,7 +467,7 @@ a.btn {
     height: 100%;
     width: 100%;
     pointer-events: none;
-    background: linear-gradient(transparent 75px , hsl(var(--color-dark-lighter)));
+    background: linear-gradient(transparent 75%, hsl(var(--color-dark-lighter)));
 }
 
 .group-field {
@@ -498,14 +507,39 @@ a.btn {
 }
 
 .flash-message {
-    position: absolute;
-    top: 0;
+    display: flex;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    right: 0;
     z-index: 100;
-    width: 100%;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    animation: slide-down 300ms ease-out, slide-up 300ms ease-in 3700ms forwards;
+    margin: 0 2rem 2rem;
+    padding: 1.2rem 3rem 1.2rem 1rem;
+    min-width: 250px;
+    border-radius: 15px;
+    background-color: hsl(var(--color-dark-lighter));
+    box-shadow: 0 0 10px 1px hsla(0, 0%, 0%, 0.1);
+    animation: slide-up 300ms ease-out, slide-down-out 300ms ease-out 3700ms forwards;
+}
+
+.flash-message > i {
+    font-size: 20px;
+    border-radius: 50%;
+    margin-right: 1rem; 
+}
+
+.flash-message.error > i {
+    color: hsl(var(--color-danger));
+    box-shadow: 0 0px 10px 4px hsl(var(--color-danger) / 0.3);
+}
+
+.flash-message.success > i {
+    color: hsl(var(--color-success));
+    box-shadow: 0 0px 10px 4px hsl(var(--color-success) / 0.3);
+}
+
+.flash-message > div > p {
+    color: hsl(0, 0%, 85%);
 }
 
 .attribution {
@@ -533,11 +567,22 @@ a.btn {
 
 @keyframes slide-up {
     from {
+        opacity: 0;
+        transform: translateY(10%);
+    }
+    to {
         opacity: 1;
-        top: 0;
+        transform: translateY(0%);
+    }
+}
+
+@keyframes slide-down-out {
+    from {
+        opacity: 1;
+        transform: translateY(0%);
     }
     to {
         opacity: 0;
-        top: -100%;
+        transform: translateY(10%);
     }
 }

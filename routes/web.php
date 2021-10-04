@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\PostController;
-use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\PostController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,20 +19,19 @@ use Illuminate\Support\Facades\Route;
 
 // Post routes
 Route::get('/', [PostController::class, 'index']);
-
-Route::group(['prefix' => '/posts', 'middleware' => ['auth']], function () {
-    Route::get('/show/{post}', [PostController::class, 'show'])->withoutMiddleware('auth');
-    Route::delete('/destroy/{id}', [PostController::class, 'destroy']);
-    Route::put('/update/{id}', [PostController::class, 'update']);
-    Route::get('/edit/{post}', [PostController::class, 'edit']);
-    Route::post('/store', [PostController::class, 'store']);
-    Route::view('/create', 'posts.create');
-});
+Route::resource('posts', PostController::class)->except('index');
 
 // Login/Register routes
 Route::view('/login', 'users.login')->name('login');
 Route::view('/register', 'users.register')->name('register');
 
-Route::post('/login', [UserController::class, 'authenticate']);
-Route::post('/logout', [UserController::class, 'logout']);
-Route::post('/register', [UserController::class, 'store']);
+Route::post('/login', [LoginController::class, 'authenticate']);
+Route::post('/logout', [LoginController::class, 'logout']);
+Route::post('/register', [RegisterController::class, 'store']);
+
+// User routes
+Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
+    Route::get('/{username}', [UserController::class, 'profile'])->withoutMiddleware('auth');
+    Route::get('/{username}/edit', [UserController::class, 'edit']);
+    Route::post('/{username}', [UserController::class, 'update']);
+});

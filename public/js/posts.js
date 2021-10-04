@@ -1,6 +1,8 @@
-const posts = document.querySelectorAll('#post');
+document.querySelectorAll('.post-summary').forEach(post => {
+    post.addEventListener('click', function () {
+        location.href = post.getAttribute('data-click-link');
+    });
 
-posts.forEach(post => {
     truncate(post.querySelector('.content > p'), 1500);
 });
 
@@ -10,7 +12,7 @@ posts.forEach(post => {
  * @param {HTMLElement} element
  * @param {number} length
  */
-function truncate(element, length) {
+ function truncate(element, length) {
     if (element.innerText.length > length) {
         element.innerText = element.innerText.slice(0, 1000);
         element.classList.add('text-opacity');

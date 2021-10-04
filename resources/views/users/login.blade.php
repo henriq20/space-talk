@@ -3,9 +3,13 @@
 @section('title', 'Login - SpaceTalk')
 
 @section('content')
-    @if (session('register_success'))
-        <div class="flash-message bg-success" id="js-flash-message">
-            {{ session('register_success') }}
+    @if (session('action_success'))
+        <div class="flash-message success" id="js-flash-message">
+            <i class="fas fa-check-circle"></i>
+            <div>
+                <h4>Success!</h4>
+                <p>{{ session('action_success') }}</p>
+            </div>
         </div>
     @endif
     <main id="auth" class="flex-columns">

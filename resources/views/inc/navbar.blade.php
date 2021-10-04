@@ -12,9 +12,10 @@
                         <i class="fas fa-user-circle text-dark dropdown-toggle"></i>
                     </a>
                     <div class="dropdown-menu bg-dark">
+                        <a href="/users/{{ auth()->user()->username }}" class="dropdown-item">Profile</a>
                         <form action="/logout" method="POST">
                             @csrf
-                            <input type="submit" value="Log out" class="btn bg-dark dropdown-item text-dark">
+                            <input type="submit" value="Log out" class="dropdown-item">
                         </form>
                     </div>
                 </div>

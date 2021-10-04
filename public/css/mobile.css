@@ -10,6 +10,14 @@
     margin-top: 3rem;
 }
 
+#navbar .dropdown {
+    align-items: flex-end;
+}
+
+main.container {
+    width: 100%;
+}
+
 @media screen and (max-width: 500px) {
     .group-field {
         flex-wrap: wrap;

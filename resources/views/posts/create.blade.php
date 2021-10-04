@@ -8,7 +8,7 @@
         <div id="card">
             <h1>Create Post</h1>
             <hr>
-            <form action="/posts/store" method="POST" id="validate-form">
+            <form action="/posts" method="POST" id="validate-form">
                 @csrf
                 <div class="field">
                     <label for="title">Title</label>

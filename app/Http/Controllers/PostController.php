@@ -3,28 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Post;
-use App\Models\User;
-use App\Models\VoteToPost;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index(Request $request)
+    public function __construct()
     {
-        $q = $request->query('q');
-
-        return view('home', ['posts' => $q ? Post::search($q) : Post::all()]);
+        $this->authorizeResource(Post::class, 'post');
+        $this->middleware('auth', ['except' => ['index', 'show']]);
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
+     * Display all the posts.
+     * @return \Illuminate\Http\Response
+     */
+    public function index()
+    {
+        $posts = request()->query('q')
+            ? Post::search(request()->query('q'))
+            : Post::all();
+
+        return view('home', ['posts' => $posts]);
+    }
+
+    /**
+     * Show the page for creating a new post.
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        return view('posts.create');
+    }
+
+    /**
+     * Store a newly created post into the database.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
@@ -42,13 +54,12 @@ class PostController extends Controller
         Post::create($request->input());
 
         return redirect('/')->
-               with('store_post_success', 'Post created!');
+               with('action_success', 'Post created!');
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
+     * Display the specified post.
+     * @param  Post  $post The post to show.
      * @return \Illuminate\Http\Response
      */
     public function show(Post $post)
@@ -57,9 +68,8 @@ class PostController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  Post  $post
+     * Show the page for editing the specified post.
+     * @param  Post  $post The post to edit.
      * @return \Illuminate\Http\Response
      */
     public function edit(Post $post)
@@ -71,10 +81,10 @@ class PostController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  Post  $post The post to update.
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Post $post)
     {
         $request->validate([
             'title' => 'required|max:255',
@@ -85,7 +95,6 @@ class PostController extends Controller
             return response()->json();
         }
 
-        $post = Post::find($id);
         $post = $post->fill($request->input());
         $post->save();
 
@@ -94,15 +103,12 @@ class PostController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     *
-     * @param  int  $id
+     * @param  Post  $post The post to delete
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Post $post)
     {
-        $post = Post::find($id);
         $post->delete();
-
-        return back();
+        return back()->with('action_success', 'Your post was deleted.');
     }
 }

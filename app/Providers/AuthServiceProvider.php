@@ -3,11 +3,8 @@
 namespace App\Providers;
 
 use App\Models\Post;
-use App\Models\VoteToPost;
 use App\Policies\PostPolicy;
-use App\Policies\VotePolicy;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
-use Illuminate\Support\Facades\Gate;
 
 class AuthServiceProvider extends ServiceProvider
 {
