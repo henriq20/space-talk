@@ -21,7 +21,7 @@ class PostController extends Controller
     {
         $posts = request()->query('q')
             ? Post::search(request()->query('q'))
-            : Post::all();
+            : Post::paginate(15);
 
         return view('home', ['posts' => $posts]);
     }

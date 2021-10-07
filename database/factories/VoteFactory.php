@@ -2,17 +2,19 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
 use App\Models\User;
+use App\Models\Vote;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class UserFactory extends Factory
+class VoteFactory extends Factory
 {
     /**
      * The name of the factory's corresponding model.
      *
      * @var string
      */
-    protected $model = User::class;
+    protected $model = Vote::class;
 
     /**
      * Define the model's default state.
@@ -22,10 +24,7 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'first_name' => $this->faker->firstName(),
-            'username' => $this->faker->userName(),
-            'email' => $this->faker->email(),
-            'password' => $this->faker->password()
+            'value' => $this->faker->boolean(75)
         ];
     }
 }
