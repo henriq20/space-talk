@@ -22,6 +22,11 @@ class Vote extends Model
         return $this->belongsTo(Post::class);
     }
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function getValueAttribute()
     {
         return $this->attributes['value'] ? 1 : -1;

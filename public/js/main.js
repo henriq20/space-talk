@@ -1,31 +1,36 @@
-const textAreas = document.querySelectorAll('textarea');
-const flashMessage = document.getElementById('js-flash-message');
+/// <reference path="../../typings/globals/jquery/index.d.ts"/>
 
-if (flashMessage !== null) {
-    removeFlashMessage();
-}
-
-textAreas.forEach(textArea => fitContent(textArea));
-
-textAreas.forEach(textArea => textArea.addEventListener('keyup', () => {
-    fitContent(textArea);
-}));
+document.querySelectorAll('textarea').forEach(textArea => {
+    textArea.addEventListener('input', fitContent);
+});
 
 /**
  * Removes the flash message after 4 seconds.
- * @param {number} timeout 
  */
 function removeFlashMessage() {
-    setTimeout(() => {
-        flashMessage.parentNode.removeChild(flashMessage);
-    }, 4000);
+    const flashMessage = document.getElementById('js-flash-message');
+
+    if (flashMessage !== null) {
+        setTimeout(() => {
+            flashMessage.parentNode.removeChild(flashMessage);
+        }, 4000);
+    }
 }
 
 /**
  * Auto resizes the textArea's height when content is too long.
- * @param {HTMLTextAreaElement} textArea 
+ * @param {Event} e 
  */
-function fitContent(textArea) {
+function fitContent(e) {
+    let textArea = e.currentTarget;
+    let offset = textArea.offsetHeight - textArea.clientHeight;
+    
     textArea.style.height = 'auto';
-    textArea.style.height = textArea.scrollHeight + 'px';
+    textArea.style.height = textArea.scrollHeight + offset + 'px';
 }
+
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});

@@ -1,3 +1,5 @@
+/// <reference path="../../typings/globals/jquery/index.d.ts"/>
+
 document.querySelectorAll('.post-summary').forEach(post => {
     post.addEventListener('click', function () {
         location.href = post.getAttribute('data-click-link');
@@ -37,30 +39,34 @@ function loadPosts() {
         return;
     }
 
-    let xhr = new XMLHttpRequest();
-    xhr.open('GET', getNextPage(), true);
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-
-    xhr.onload = function () {
-        if (this.status === 200) {  
-            let div = document.createElement('div');
-            div.innerHTML = this.response;
-
-            let posts = div.querySelectorAll('main.container > .post');
-            let main = document.querySelector('main.container');
-
-            posts.forEach(post => {
-                main.appendChild(post);
-            });
+    $.ajax({
+        type: 'GET',
+        url: getNextPage(),
+        success: function (data) {
+            let document = $.parseHTML(data);
+            $('main.container').append($(document).find('.post'));
 
             isAjaxRunning = false;
         }
-    };
-    
-    xhr.send();
+    });
+
     isAjaxRunning = true;
 }
 
 function getNextPage() {
     return '?page=' + ++currentPage;
 }
+
+document.querySelectorAll('.post-summary aside').forEach(aside => {
+    aside.querySelectorAll('button').forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.stopPropagation();
+
+            let postId = aside.getAttribute('data-post-id');
+            let action = button.getAttribute('data-action');
+            let url = `/posts/${ postId }/${ action }`;
+            
+            vote(url, aside);
+        });
+    });
+});

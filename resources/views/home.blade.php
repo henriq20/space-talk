@@ -16,5 +16,6 @@
         @endforeach
     </main>
 
+    <script src="/js/votes.js"></script>
     <script src="/js/posts.js"></script>
 @endsection

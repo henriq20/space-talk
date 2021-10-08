@@ -4,6 +4,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\VoteController;
 use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
@@ -36,3 +37,7 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
     Route::get('/{username}/edit', [UserController::class, 'edit']);
     Route::post('/{username}', [UserController::class, 'update']);
 });
+
+// Vote routes
+Route::post('/posts/{post}/upvote', [VoteController::class, 'upvote'])->middleware('withMessage');
+Route::post('/posts/{post}/downvote', [VoteController::class, 'downvote'])->middleware('withMessage');
