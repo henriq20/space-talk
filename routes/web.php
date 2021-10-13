@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
@@ -23,6 +24,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PostController::class, 'index']);
 Route::resource('posts', PostController::class)->except('index');
 
+// Comment routes
+Route::resource('posts.comments', CommentController::class)
+    ->only(['store', 'update', 'destroy'])
+    ->middleware('auth');
+
 // Login/Register routes
 Route::view('/login', 'users.login')->name('login');
 Route::view('/register', 'users.register')->name('register');
@@ -41,3 +47,5 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 // Vote routes
 Route::post('/posts/{post}/upvote', [VoteController::class, 'upvote'])->middleware('withMessage');
 Route::post('/posts/{post}/downvote', [VoteController::class, 'downvote'])->middleware('withMessage');
+Route::post('/posts/comments/{comment}/upvote', [VoteController::class, 'upvote'])->middleware('withMessage');
+Route::post('/posts/comments/{comment}/downvote', [VoteController::class, 'downvote'])->middleware('withMessage');

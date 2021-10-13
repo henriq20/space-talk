@@ -14,6 +14,15 @@
         @foreach ($posts as $post)
             @include('inc.post-summary')
         @endforeach
+
+        <script>
+            // Loads posts dinamically
+            document.addEventListener('scroll', function () {
+                if (getScrollPosition() >= 85) {
+                    loadPosts();
+                }
+            });
+        </script>
     </main>
 
     <script src="/js/votes.js"></script>

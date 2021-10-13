@@ -17,7 +17,7 @@ class WithMessage
     public function handle(Request $request, Closure $next)
     {
         if (!auth()->check()) {
-            return redirect('/login')->with('action_error', 'You must be logged in to perform this operation.');
+            return redirect('/login')->with('action_error', 'You must be logged in to do this.');
         }
 
         return $next($request);

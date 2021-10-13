@@ -8,12 +8,6 @@ document.querySelectorAll('.post-summary').forEach(post => {
     truncate(post.querySelector('.content > p'), 1500);
 });
 
-document.addEventListener('scroll', function () {
-    if (getScrollPosition() >= 85) {
-        loadPosts();
-    }
-});
-
 /**
  * Truncates the text content of the element if its length is greather than the
  * provided length.
@@ -57,16 +51,16 @@ function getNextPage() {
     return '?page=' + ++currentPage;
 }
 
-document.querySelectorAll('.post-summary aside').forEach(aside => {
-    aside.querySelectorAll('button').forEach(button => {
+document.querySelectorAll('.vote-arrows').forEach(voteArrows => {
+    voteArrows.querySelectorAll('button').forEach(button => {
         button.addEventListener('click', (e) => {
             e.stopPropagation();
 
-            let postId = aside.getAttribute('data-post-id');
+            let postId = voteArrows.getAttribute('data-post-id');
             let action = button.getAttribute('data-action');
             let url = `/posts/${ postId }/${ action }`;
             
-            vote(url, aside);
+            vote(url, voteArrows);
         });
     });
 });

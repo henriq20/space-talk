@@ -26,9 +26,14 @@ class Post extends Model
         return $this->hasMany(Vote::class);
     }
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
+
     public function totalVotes()
     {
-        return $this->votes()->sum('value');
+        return $this->votes->sum('value');
     }
 
     public function scopeSearch($query, $value)

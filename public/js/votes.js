@@ -1,12 +1,12 @@
-function vote(url, asideElement) {
+function vote(url, voteArrowsElement) {
     let xhr = new XMLHttpRequest();
     xhr.open('POST', url, true);
     xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
     xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
 
-    const upvotedEvent = new CustomEvent('upvoted', { detail: getDetails(asideElement) });
-    const downvotedEvent = new CustomEvent('downvoted', { detail: getDetails(asideElement) });
-    const voteUndoneEvent = new CustomEvent('voteUndone', { detail: getDetails(asideElement) });
+    const upvotedEvent = new CustomEvent('upvoted', { detail: getDetails(voteArrowsElement) });
+    const downvotedEvent = new CustomEvent('downvoted', { detail: getDetails(voteArrowsElement) });
+    const voteUndoneEvent = new CustomEvent('voteUndone', { detail: getDetails(voteArrowsElement) });
 
     xhr.onload = function () {
         // Not logged in
@@ -39,13 +39,13 @@ function vote(url, asideElement) {
     xhr.send();
 }
 
-function getDetails(asideElement) {
+function getDetails(voteArrowsElement) {
     return {
-        votesDiv: asideElement.querySelector('.votes'),
-        upvoteButton: asideElement.querySelector('button.upvote'),
-        upvoteIcon: asideElement.querySelector('button.upvote > i'),
-        downvoteButton: asideElement.querySelector('button.downvote'),
-        downvoteIcon: asideElement.querySelector('button.downvote > i')
+        votesDiv: voteArrowsElement.querySelector('.votes'),
+        upvoteButton: voteArrowsElement.querySelector('button.upvote'),
+        upvoteIcon: voteArrowsElement.querySelector('button.upvote > i'),
+        downvoteButton: voteArrowsElement.querySelector('button.downvote'),
+        downvoteIcon: voteArrowsElement.querySelector('button.downvote > i')
     };
 }
 

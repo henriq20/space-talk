@@ -42,15 +42,10 @@
 
 /* Input */
 .text-input {
-    display: block;
     width: 100%;
-    min-height: 45px;
     padding: 0 15px;
-    font-weight: 600;
+    min-height: 45px;
     border: 1px solid transparent;
-    color: hsl(var(--color-text-white));
-    border-radius: var(--border-radius);
-    background-color: hsl(var(--color-dark-lighter));
     transition: border 200ms, box-shadow 200ms;
 }
 
@@ -73,8 +68,14 @@ textarea.text-input {
 
 .btn-primary {
     height: 45px;
+    font-size: 1rem;
     padding: 0 1.5rem;  
     border-radius: var(--border-radius);
+}
+
+.btn-primary:disabled {
+    pointer-events: none;
+    background-color: hsl(var(--color-dark-lightest));
 }
 
 .btn-dark {

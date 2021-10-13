@@ -13,11 +13,11 @@
             @auth
                 @if (auth()->id() === $post->user_id)
                     <div class="actions">
-                        <a href="/posts/{{ $post->id }}/edit" class="btn btn-dark">Edit</a>
+                        <a href="/posts/{{ $post->id }}/edit" class="btn">Edit</a>
                         <form action="/posts/{{ $post->id }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <input type="submit" class="btn btn-dark" value="Delete">
+                            <input type="submit" class="btn" value="Delete">
                         </form>
                     </div>
                 @endif
@@ -29,8 +29,8 @@
             <p class="text-dark">{{ $post->body }}</p>
         </div>
         <footer>
-            <i class="fas fa-comments text-dark"></i>
-            <span class="comments">500</span>
+            <i class="far fa-comment-alt text-dark"></i>
+            <span class="comments">{{ $post->comments()->count() }}</span>
         </footer>
     </main>
 </section>

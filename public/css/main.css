@@ -11,6 +11,7 @@
     --color-text-dark: 245 16% 45%;
     --color-success: 137 81% 63%;
     --color-danger: 360 82% 63%;
+    --color-reading-white: 0 0% 85%;
 
     /* Color Variations */
     --color-primary-darker: 222 100% 55%;
@@ -61,12 +62,27 @@ hr {
     background-color: hsl(var(--color-dark-lightest));
 }
 
+pre {
+    white-space: pre-wrap;
+}
+
 input, textarea, button, a {
     outline: none;
     border: none;
 }
 
+input, textarea {
+    display: block;
+    font-weight: 600;
+    color: hsl(var(--color-text-white));
+    border-radius: var(--border-radius);
+    background-color: hsl(var(--color-dark-lighter));
+}
+
 textarea {
+    width: 100%;
+    resize: none;
+    padding: 15px;
     overflow: hidden;
     min-height: 200px !important;
 }
@@ -268,54 +284,57 @@ main.container {
     border: 1px solid hsl(var(--color-dark-lightest));
 }
 
-.post aside {
-    margin-right: 1.5rem;
+.vote-arrows {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.post aside .votes {
+.vote-arrows .votes {
     font-weight: 600;
-    margin: 0.2rem 0;
 }
 
-/* Post - Arrows */
-.post aside .btn {
-    font-size: 1.8rem;
-    width: 2.2rem;
-    height: 2.2rem;
-    border-radius: 50%;
+.vote-arrows .btn {
+    font-size: 1.5rem;
 }
 
-.post aside .btn,
-.post aside .fas {
+.vote-arrows .btn,
+.vote-arrows .fas {
     transition: transform 200ms ease-out, color 200ms ease-out;
 }
 
-.post aside .upvoted {
+.vote-arrows .upvoted {
     color: hsl(var(--color-primary)) !important;
 }
 
-.post aside .downvoted {
+.vote-arrows .downvoted {
     color: hsl(var(--color-danger)) !important;
 }
 
-/* Post - Arrows' Hover Animation */
-.post aside .btn:hover .fa-arrow-up {
-    transform: translateY(-8%);
+.vote-arrows .btn:hover .fa-arrow-up {
+    transform: translateY(-5%);
     color: hsl(var(--color-primary)) !important;
 }
 
-.post aside .btn:hover .fa-arrow-down {
-    transform: translateY(8%);
+.vote-arrows .btn:hover .fa-arrow-down {
+    transform: translateY(5%);
     color: hsl(var(--color-danger)) !important;
+}
+
+/* Post - Aside */
+.post aside {
+    margin-right: 1.5rem;
 }
 
 /* Post - Main */
+.post main {
+    width: 100%;
+}
+
 .post main header {
     display: flex;
     justify-content: space-between;
+    
 }
 
 .post main header .actions {
@@ -324,46 +343,47 @@ main.container {
 
 .post main header .actions .btn {
     height: 100%;
-    margin-left: 0.5rem;
-    border-radius: 8px;
+    font-weight: 500;
+    margin-left: 1rem;
+    color: hsl(var(--color-text-dark));
 }
 
 .post main header .actions a:hover {
-    background-color: hsl(var(--color-primary));
+    color: hsl(var(--color-primary));
 }
 
 .post main header .actions input:hover {
-    background-color: hsl(var(--color-danger));
+    color: hsl(var(--color-danger));
 }
 
-.post main .author {
+.author {
     display: flex;
     align-items: center;
 }
 
-.post main .author .author-picture {
+.author-picture {
     height: 30px;
     width: 30px;
     border-radius: 50%;
     margin-right: 0.5rem;
 }
 
-.post main .author .author-name {
+.author-name {
     transition: color 200ms;    
 }
 
-.post main .author .author-name:hover {
+.author-name:hover {
     color: hsl(var(--color-primary-lightest));
 }
 
 .post main > hr {
     margin: 1rem 0;
+    background: linear-gradient(to right, hsl(var(--color-dark-lightest)), transparent);
 }
 
 /* Post - Main - Content */
 .post main .content pre {
-    white-space: pre-wrap;
-    color: hsl(0, 0%, 85%);
+    color: hsl(var(--color-reading-white));
 }
 
 .post main .content h2 {
@@ -388,11 +408,73 @@ main.container {
 
 .post footer > i {
     font-size: 1.2rem;
-    margin-right: 0.2rem;
+    margin-right: 0.3rem;
 }
 
 .post footer > span {
     font-weight: 600;
+    color: hsl(var(--color-text-dark));
+}
+
+#discussion {
+    width: 100%;
+    padding: 1.5rem;
+    border-radius: var(--border-radius);
+}
+
+#discussion textarea {
+    margin: 1rem 0 0.5rem;
+    border: 1px solid hsl(var(--color-dark-lightest));
+}
+
+#discussion .btn {
+    display: block;
+    margin-left: auto;
+}
+
+.comment {
+    display: flex;
+    margin-top: 2rem;
+    border-radius: var(--border-radius);
+}
+
+.comment aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-right: 0.5rem;
+}
+
+.comment aside .author-picture {
+    margin: 0;
+}
+
+.comment aside .vertical-line {
+    margin-top: 0.5rem;
+}
+
+.vertical-line {
+    width: 2px;
+    height: 100%;
+    background-color: hsl(var(--color-dark-lightest));
+}
+
+.comment .actions {
+    display: flex;
+    margin-top: 0.4rem;
+}
+
+.comment .content {
+    margin-top: 0.2rem;
+    color: hsl(var(--color-reading-white));
+}
+
+.comment .actions .vote-arrows {
+    flex-direction: row;
+}
+
+.comment .actions .vote-arrows > * {
+    margin-right: 0.5rem;
 }
 
 #card {

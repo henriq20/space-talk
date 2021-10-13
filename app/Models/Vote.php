@@ -27,8 +27,8 @@ class Vote extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getValueAttribute()
+    public function getValueAttribute($value)
     {
-        return $this->attributes['value'] ? 1 : -1;
+        return $value ? 1 : -1;
     }
 }
