@@ -102,6 +102,16 @@ class PostController extends Controller
     }
 
     /**
+     * Show the form for deleting the specified post.
+     * @param  Post  $post The post to delete
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(Post $post)
+    {
+        return view('posts.delete', ['post' => $post]);
+    }
+
+    /**
      * Remove the specified resource from storage.
      * @param  Post  $post The post to delete
      * @return \Illuminate\Http\Response
@@ -109,6 +119,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
-        return back()->with('action_success', 'Your post was deleted.');
+        return redirect('/')->with('action_success', 'Your post was deleted.');
     }
 }

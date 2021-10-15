@@ -51,16 +51,33 @@ function getNextPage() {
     return '?page=' + ++currentPage;
 }
 
-document.querySelectorAll('.vote-arrows').forEach(voteArrows => {
-    voteArrows.querySelectorAll('button').forEach(button => {
-        button.addEventListener('click', (e) => {
+$('.vote-arrows').each(function () {
+    const voteArrows = $(this);
+
+    $(voteArrows).find('button').each(function () {
+        $(this).on('click', e => {
             e.stopPropagation();
 
-            let postId = voteArrows.getAttribute('data-post-id');
-            let action = button.getAttribute('data-action');
-            let url = `/posts/${ postId }/${ action }`;
-            
-            vote(url, voteArrows);
+            let postId = $(voteArrows).data('post-id');
+            let action = $(this).data('action');
+
+            const vote = new Vote(voteArrows);
+            vote.vote(`/posts/${ postId }/${ action }`);
+        });
+    })
+});
+
+$('.post .js-delete-post').each((i, form) => {
+    $(form).children('input:submit').on('click', e => {
+        e.preventDefault();
+        e.stopPropagation();
+
+        $.ajax({
+            type: 'GET',
+            url: $(form).attr('action'),
+            success: function (popup) {
+                $('body').prepend(popup);
+            }
         });
     });
 });

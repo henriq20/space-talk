@@ -12,12 +12,12 @@ class VoteController extends Controller
         if (user()->upvoted($post)) {
             user()->votes()->where('post_id', $post->id)->delete();
 
-            return response()->json(['status' => 'deleted']);
+            return response()->json(0);
         }
 
         $this->vote($post, true);
 
-        return response()->json(['status' => 'upvoted']);
+        return response()->json(1);
     }
 
     public function downvote(Post $post)
@@ -26,12 +26,12 @@ class VoteController extends Controller
         if (user()->downvoted($post)) {
             user()->votes()->where('post_id', $post->id)->delete();
 
-            return response()->json(['status' => 'deleted']);
+            return response()->json(0);
         }
 
         $this->vote($post, false);
 
-        return response()->json(['status' => 'downvoted']);
+        return response()->json(-1);
     }
 
     private function vote(Post $post, bool $value)

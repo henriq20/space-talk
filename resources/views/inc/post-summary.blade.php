@@ -14,9 +14,8 @@
                 @if (auth()->id() === $post->user_id)
                     <div class="actions">
                         <a href="/posts/{{ $post->id }}/edit" class="btn">Edit</a>
-                        <form action="/posts/{{ $post->id }}" method="POST">
+                        <form action="/posts/{{ $post->id }}/delete" method="GET" class="js-delete-post">
                             @csrf
-                            @method('DELETE')
                             <input type="submit" class="btn" value="Delete">
                         </form>
                     </div>

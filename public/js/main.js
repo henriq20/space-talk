@@ -29,6 +29,12 @@ function fitContent(e) {
     textArea.style.height = textArea.scrollHeight + offset + 'px';
 }
 
+// const popup = document.getElementById('popup');
+
+// popup.querySelector('input[value="Cancel"]').addEventListener('click', () => {
+//     document.body.removeChild(popup);
+// });
+
 $.ajaxSetup({
     headers: {
         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')

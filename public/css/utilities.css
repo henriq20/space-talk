@@ -66,7 +66,9 @@ textarea.text-input {
     background-color: transparent;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-danger,
+.btn-dark {
     height: 45px;
     font-size: 1rem;
     padding: 0 1.5rem;  
@@ -78,27 +80,22 @@ textarea.text-input {
     background-color: hsl(var(--color-dark-lightest));
 }
 
-.btn-dark {
-    padding: 0 1.2rem;
-    border-radius: var(--border-radius);
+.btn-danger {
+    background-color: hsl(var(--color-danger));
 }
 
 /* Hover/Active/Focus animations */
-.btn-primary:hover {
-    background-color: hsl(var(--color-primary-darker));
-}
+.btn-primary:hover { background-color: hsl(var(--color-primary-darker)); }
+.btn-primary:active { background-color: hsl(var(--color-primary-darkest)); }
 
-.btn-primary:active {
-    background-color: hsl(var(--color-primary-darkest));
-}
+.btn-danger:hover { background-color: hsl(var(--color-danger-darker)); }
+.btn-danger:active { background-color: hsl(var(--color-danger-darkest)); }
 
-.btn-transparent:hover {
-    color: hsl(var(--color-primary-darker));
-}
+.btn-dark:hover { background-color: hsl(var(--color-dark-lightest) / 0.8); }
+.btn-dark:active { background-color: hsl(var(--color-dark-lightest) / 0.5); }
 
-.btn-transparent:active {
-    color: hsl(var(--color-primary-darkest));
-}
+.btn-transparent:hover { color: hsl(var(--color-primary-darker)); }
+.btn-transparent:active { color: hsl(var(--color-primary-darkest)); }
 
 .text-input:hover {
     border: 1px solid hsl(var(--color-dark-lightest));

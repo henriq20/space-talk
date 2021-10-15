@@ -1,92 +1,86 @@
-function vote(url, voteArrowsElement) {
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', url, true);
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+/// <reference path="../../typings/globals/jquery/index.d.ts"/>
 
-    const upvotedEvent = new CustomEvent('upvoted', { detail: getDetails(voteArrowsElement) });
-    const downvotedEvent = new CustomEvent('downvoted', { detail: getDetails(voteArrowsElement) });
-    const voteUndoneEvent = new CustomEvent('voteUndone', { detail: getDetails(voteArrowsElement) });
+class Vote {
+    constructor (voteArrows) {
+        this.upvoteButton = $(voteArrows).children('button.upvote');
+        this.upvoteIcon = $(this.upvoteButton).children('i');
 
-    xhr.onload = function () {
-        // Not logged in
-        if (this.responseURL.endsWith('/login')) {
-            console.log(this.responseURL);
-            let loginPage = new DOMParser().parseFromString(this.responseText, 'text/html');
-            let flashMessage = loginPage.querySelector('.flash-message');
-            showFlashMessage(flashMessage);
+        this.downvoteButton = $(voteArrows).children('button.downvote');
+        this.downvoteIcon = $(this.downvoteButton).children('i');
 
+        this.votesDiv = $(voteArrows).children('.votes');
+    }
+
+    upvote() {
+        this.upvoteIcon.addClass('upvoted');
+
+        if (this.downvoteIcon.hasClass('downvoted')) {
+            this.downvoteIcon.removeClass('downvoted');
+            this.updateVotesNumber(2);
             return;
         }
-
-        let data = JSON.parse(this.responseText);
-
-        switch (data.status) {
-            case 'upvoted':
-                document.dispatchEvent(upvotedEvent);
-                break;
-            
-            case 'downvoted':
-                document.dispatchEvent(downvotedEvent);
-                break;
         
-            default:
-                document.dispatchEvent(voteUndoneEvent);
-                break;
+        this.updateVotesNumber(1);
+    }
+    
+    downvote() {
+        this.downvoteIcon.addClass('downvoted');
+
+        if (this.upvoteIcon.hasClass('upvoted')) {
+            this.upvoteIcon.removeClass('upvoted');
+            this.updateVotesNumber(-2);
+            return;
         }
-    };
+        
+        this.updateVotesNumber(-1);
+    }
 
-    xhr.send();
-}
+    undoVote() {
+        if (this.upvoteIcon.hasClass('upvoted')) {
+            this.upvoteIcon.removeClass('upvoted');
+            this.updateVotesNumber(-1);
+            return;
+        }
+        
+        this.downvoteIcon.removeClass('downvoted');
+        this.updateVotesNumber(1);
+    }
 
-function getDetails(voteArrowsElement) {
-    return {
-        votesDiv: voteArrowsElement.querySelector('.votes'),
-        upvoteButton: voteArrowsElement.querySelector('button.upvote'),
-        upvoteIcon: voteArrowsElement.querySelector('button.upvote > i'),
-        downvoteButton: voteArrowsElement.querySelector('button.downvote'),
-        downvoteIcon: voteArrowsElement.querySelector('button.downvote > i')
-    };
+    updateVotesNumber(number) {
+        let votesCount = parseInt(this.votesDiv.text());
+        this.votesDiv.text(votesCount + number);
+    }
+
+    vote(url) {
+        $.ajax({
+            type: 'POST',
+            url: url,
+            dataType: 'json',
+            error: xhr => {
+                let flashMessage = $(xhr.responseText).filter('.flash-message');
+                showFlashMessage(flashMessage);
+            },
+            success: data => {
+                switch (data) {
+                    case 1:
+                        this.upvote();
+                        break;
+
+                    case -1:
+                        this.downvote();
+                        break;
+                
+                    default:
+                        this.undoVote();
+                }
+            }
+        });
+    }
 }
 
 function showFlashMessage(flashMessage) {
-    if (document.querySelector('.flash-message') === null) {
-        document.body.appendChild(flashMessage);
+    if (!$(document.body).has('.flash-message').length) {
+        $(document.body).prepend(flashMessage);
         removeFlashMessage();
     }
 }
-
-document.addEventListener('upvoted', function(e) {
-    e.detail.upvoteIcon.classList.add('upvoted');
-
-    if (e.detail.downvoteIcon.classList.contains('downvoted')) {
-        e.detail.downvoteIcon.classList.remove('downvoted');
-        e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) + 2;
-        return;
-    }
-    
-    e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) + 1;
-});
-
-document.addEventListener('downvoted', function(e) {
-    e.detail.downvoteIcon.classList.add('downvoted');
-
-    if (e.detail.upvoteIcon.classList.contains('upvoted')) {
-        e.detail.upvoteIcon.classList.remove('upvoted');
-        e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) - 2;
-        return;
-    }
-    
-    e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) - 1;
-});
-
-document.addEventListener('voteUndone', function(e) {
-    if (e.detail.upvoteIcon.classList.contains('upvoted')) {
-        e.detail.upvoteIcon.classList.remove('upvoted');
-        e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) - 1;
-        return;
-    }
-    
-    e.detail.downvoteIcon.classList.remove('downvoted');
-    e.detail.votesDiv.textContent = Number(e.detail.votesDiv.textContent) + 1;
-});

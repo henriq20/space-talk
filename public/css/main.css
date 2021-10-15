@@ -21,6 +21,9 @@
 
     --color-dark-lighter: 244 16% 22%;
     --color-dark-lightest: 244 16% 28%;
+
+    --color-danger-darker: 360 82% 58%;
+    --color-danger-darkest: 360 82% 55%;
 }
 
 * {
@@ -642,6 +645,60 @@ a.btn {
     min-height: 0;
 }
 
+#popup {
+    position: fixed;
+    top: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#popup::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: .5;
+    background-color: hsl(var(--color-dark));
+}
+
+#popup > div {
+    z-index: 1;
+    width: 320px;
+    padding: 1.5rem;
+    margin: auto;
+    border-radius: var(--border-radius);
+    background-color: hsl(var(--color-dark));
+    border: 1px solid hsl(var(--color-dark-lighter));
+    animation: slide-up 200ms ease-out;
+}
+
+#popup i {
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+}
+
+#popup h2 {
+    font-weight: 600;
+}
+
+#popup p {
+    padding: 0.5rem 0 1.5rem;
+}
+
+#popup > div > div {
+    display: flex;
+    justify-content: space-between;
+}
+
+#popup > div > div .btn {
+    padding: 0 2.5rem;
+}
+
+/* Keyframes */
 @keyframes slide-down {
     from {
         opacity: 0;
