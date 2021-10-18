@@ -67,6 +67,6 @@ class PostPolicy
 
     private function isAuthor(User $user, Post $post)
     {
-        return $user->id === auth()->id() && $post->user_id === $user->id;
+        return $user->id === auth()->id() && $post->author_id === $user->id;
     }
 }

@@ -385,7 +385,7 @@ main.container {
 }
 
 /* Post - Main - Content */
-.post main .content pre {
+.post main .content .post-body {
     color: hsl(var(--color-reading-white));
 }
 
@@ -399,7 +399,7 @@ main.container {
 }
 
 .post main .content p,
-.post main .content pre {
+.post main .content .post-body {
     font-family: 'Inter', sans-serif;
 }
 

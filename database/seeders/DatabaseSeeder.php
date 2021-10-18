@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
             foreach ($user->posts as $post) {
                 $countOfVotes = random_int(10, 500);
                 $post->votes()->saveMany(Vote::factory()->count($countOfVotes)->create([
-                    'user_id' => $post->user_id,
+                    'author_id' => $post->author_id,
                     'post_id' => $post->id
                 ]));
             }

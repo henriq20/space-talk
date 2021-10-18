@@ -2,44 +2,46 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Post;
+use Illuminate\Support\Str;
 
 class VoteController extends Controller
 {
-    public function upvote(Post $post)
+    public function vote(int $id, int $value)
     {
-        // If the user has already upvoted the post, then deletes the vote
-        if (user()->upvoted($post)) {
-            user()->votes()->where('post_id', $post->id)->delete();
+        $table = $this->getVotingTable();
+        $model = $table == 'comments' ? Comment::find($id) : Post::find($id);
 
+        if ($model == null) {
+            return response()->json('Not found');
+        }
+
+        if ($this->wantsToUndoVote($model, $value)) {
+            $model->votes()->delete($id);
             return response()->json(0);
         }
 
-        $this->vote($post, true);
+        $foreignKey = Str::singular($table) . '_id';
 
-        return response()->json(1);
-    }
-
-    public function downvote(Post $post)
-    {
-        // If the user has already downvoted the post, then deletes the vote
-        if (user()->downvoted($post)) {
-            user()->votes()->where('post_id', $post->id)->delete();
-
-            return response()->json(0);
-        }
-
-        $this->vote($post, false);
-
-        return response()->json(-1);
-    }
-
-    private function vote(Post $post, bool $value)
-    {
-        $post->votes()->updateOrCreate(['user_id' => user()->id, 'post_id' => $post->id], [
-            'user_id' => $post->user_id,
-            'post_id' => $post->id,
+        $model->votes()->updateOrCreate([$foreignKey => $model->id, 'voter_id' => auth()->id()], [
+            $foreignKey => $model->id,
+            'voter_id' => auth()->id(),
             'value' => $value
         ]);
+
+        return response()->json($value);
+    }
+
+    private function wantsToUndoVote($model, $value)
+    {
+        return user()->upvoted($model) && $value == 1 || user()->downvoted($model) && $value == -1;
+    }
+
+    private function getVotingTable()
+    {
+        return str_starts_with(request()->getRequestUri(), '/posts/comments/')
+            ? 'comments'
+            : 'posts';
     }
 }

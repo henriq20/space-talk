@@ -48,11 +48,11 @@
                         <div class="actions">
                             <div class="vote-arrows" data-comment-id="{{ $comment->id }}">
                                 <button class="upvote btn btn-transparent" data-action="upvote">
-                                    <i class="fas fa-arrow-up text-dark"></i>
+                                    <i class="fas fa-arrow-up text-dark @auth @if (auth()->user()->upvoted($comment)) upvoted @endif @endauth"></i>
                                 </button>
-                                <div class="votes">0</div>
+                                <div class="votes">{{ abbreaviate($comment->votes()->sum('value')) }}</div>
                                 <button class="downvote btn btn-transparent" data-action="downvote">
-                                    <i class="fas fa-arrow-down text-dark"></i>
+                                    <i class="fas fa-arrow-down text-dark @auth @if (auth()->user()->downvoted($comment)) downvoted @endif @endauth"></i>
                                 </button>
                             </div>
                         </div>
@@ -63,4 +63,5 @@
     </main>
     <script src="/js/votes.js"></script>
     <script src="/js/posts.js"></script>
+    <script src="/js/comments.js"></script>
 @endsection

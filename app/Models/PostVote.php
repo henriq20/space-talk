@@ -5,15 +5,15 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Vote extends Model
+class PostVote extends Model
 {
     use HasFactory;
 
     public $timestamps = false;
 
     protected $fillable = [
-        'user_id',
         'post_id',
+        'voter_id',
         'value'
     ];
 
@@ -24,11 +24,6 @@ class Vote extends Model
 
     public function user()
     {
-        return $this->belongsTo(User::class);
-    }
-
-    public function getValueAttribute($value)
-    {
-        return $value ? 1 : -1;
+        return $this->belongsTo(User::class, 'voter_id');
     }
 }

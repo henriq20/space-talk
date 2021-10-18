@@ -11,7 +11,7 @@
                 </div>
             </div>
             @auth
-                @if (auth()->id() === $post->user_id)
+                @if (auth()->id() === $post->author_id)
                     <div class="actions">
                         <a href="/posts/{{ $post->id }}/edit" class="btn">Edit</a>
                         <form action="/posts/{{ $post->id }}/delete" method="GET" class="js-delete-post">
@@ -25,7 +25,7 @@
         <hr>
         <div class="content">
             <h2>{{ $post->title }}</h2>
-            <pre>{{ $post->body }}</pre>
+            <div class="post-body">{!! preventXSS(nl2br($post->body)) !!}</div>
         </div>
         <footer>
             <i class="far fa-comment-alt text-dark"></i>

@@ -29,3 +29,22 @@ function abbreaviate($number)
     // substr() to only get 1 decimal place
     return floatval(substr($number, 0, strpos($number, '.') + 2)) . $suffix;
 }
+
+/**
+ * Removes script tags from the provided html.
+ * @param string $html The string to remove the script tags from.
+ * @return void
+ */
+function preventXSS(string $html)
+{
+    $dom = new DOMDocument();
+    $dom->loadHTML($html, LIBXML_HTML_NOIMPLIED|LIBXML_HTML_NODEFDTD);
+
+    $scriptTags = $dom->getElementsByTagName('script');
+
+    foreach ($scriptTags as $script) {
+        $script->parentNode->removeChild($script);
+    }
+
+    return $dom->saveHTML();
+}

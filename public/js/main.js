@@ -5,19 +5,6 @@ document.querySelectorAll('textarea').forEach(textArea => {
 });
 
 /**
- * Removes the flash message after 4 seconds.
- */
-function removeFlashMessage() {
-    const flashMessage = document.getElementById('js-flash-message');
-
-    if (flashMessage !== null) {
-        setTimeout(() => {
-            flashMessage.parentNode.removeChild(flashMessage);
-        }, 4000);
-    }
-}
-
-/**
  * Auto resizes the textArea's height when content is too long.
  * @param {Event} e 
  */

@@ -22,7 +22,7 @@
                     <label for="tags">Tags</label>
                     <input type="text" name="tags" class="text-input">
                 </div>
-                <input type="hidden" name="user_id" value="{{ auth()->id() }}">
+                <input type="hidden" name="author_id" value="{{ auth()->id() }}">
                 <input type="submit" class="btn btn-primary" id="js-validate-inputs" value="Create">
 
                 <script src="/js/validation.js"></script>

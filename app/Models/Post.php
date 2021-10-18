@@ -10,7 +10,7 @@ class Post extends Model
     use HasFactory;
     
     protected $fillable = [
-        'user_id',
+        'author_id',
         'title',
         'body',
         'tags'
@@ -18,12 +18,7 @@ class Post extends Model
 
     public function author()
     {
-        return $this->belongsTo(User::class, 'user_id');
-    }
-
-    public function votes()
-    {
-        return $this->hasMany(Vote::class);
+        return $this->belongsTo(User::class);
     }
 
     public function comments()
@@ -31,9 +26,9 @@ class Post extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function totalVotes()
+    public function votes()
     {
-        return $this->votes->sum('value');
+        return $this->hasMany(PostVote::class);
     }
 
     public function scopeSearch($query, $value)

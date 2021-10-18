@@ -60,17 +60,21 @@ class Vote {
                 let flashMessage = $(xhr.responseText).filter('.flash-message');
                 showFlashMessage(flashMessage);
             },
-            success: data => {
+            success: data => { 
+                console.log(data);
                 switch (data) {
                     case 1:
+                        console.log('upvoted');
                         this.upvote();
                         break;
-
+                        
                     case -1:
+                        console.log('downvoted');
                         this.downvote();
                         break;
-                
+                            
                     default:
+                        console.log('unvoted');
                         this.undoVote();
                 }
             }
@@ -81,6 +85,5 @@ class Vote {
 function showFlashMessage(flashMessage) {
     if (!$(document.body).has('.flash-message').length) {
         $(document.body).prepend(flashMessage);
-        removeFlashMessage();
     }
 }

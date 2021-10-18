@@ -11,7 +11,7 @@
                 </div>
             </div>
             @auth
-                @if (auth()->id() === $post->user_id)
+                @if (auth()->id() === $post->author_id)
                     <div class="actions">
                         <a href="/posts/{{ $post->id }}/edit" class="btn">Edit</a>
                         <form action="/posts/{{ $post->id }}/delete" method="GET" class="js-delete-post">

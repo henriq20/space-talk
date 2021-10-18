@@ -45,7 +45,5 @@ Route::group(['prefix' => 'users', 'middleware' => 'auth'], function () {
 });
 
 // Vote routes
-Route::post('/posts/{post}/upvote', [VoteController::class, 'upvote'])->middleware('withMessage');
-Route::post('/posts/{post}/downvote', [VoteController::class, 'downvote'])->middleware('withMessage');
-Route::post('/posts/comments/{comment}/upvote', [VoteController::class, 'upvote'])->middleware('withMessage');
-Route::post('/posts/comments/{comment}/downvote', [VoteController::class, 'downvote'])->middleware('withMessage');
+Route::post('/posts/{post}/vote/{value}', [VoteController::class, 'vote'])->middleware('withMessage');
+Route::post('/posts/comments/{comment}/vote/{value}', [VoteController::class, 'vote'])->middleware('withMessage');

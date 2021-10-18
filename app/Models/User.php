@@ -22,12 +22,7 @@ class User extends Authenticatable
 
     public function posts()
     {
-        return $this->hasMany(Post::class);
-    }
-
-    public function votes()
-    {
-        return $this->hasMany(Vote::class);
+        return $this->hasMany(Post::class, 'author_id');
     }
 
     public function setPasswordAttribute($password)
@@ -35,20 +30,20 @@ class User extends Authenticatable
         $this->attributes['password'] = bcrypt($password);
     }
 
-    public function upvoted(Post $post)
+    public function upvoted(Post|Comment $entity)
     {
-        return $this->voted(true, $post);
+        return $this->voted($entity, 1);
     }
 
-    public function downvoted(Post $post)
+    public function downvoted(Post|Comment $entity)
     {
-        return $this->voted(false, $post);
+        return $this->voted($entity, -1);
     }
 
-    private function voted(bool $value, Post $post)
+    private function voted(Post|Comment $entity, int $value)
     {
-        return $post->votes()->where('user_id', auth()->id())
-                             ->where('value', $value)
-                             ->exists();
+        return $entity->votes()->where('voter_id', auth()->id())
+                               ->where('value', $value)
+                               ->exists();
     }
 }

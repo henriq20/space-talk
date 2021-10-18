@@ -51,7 +51,7 @@ function getNextPage() {
     return '?page=' + ++currentPage;
 }
 
-$('.vote-arrows').each(function () {
+$('.post .vote-arrows').each(function () {
     const voteArrows = $(this);
 
     $(voteArrows).find('button').each(function () {
@@ -62,7 +62,7 @@ $('.vote-arrows').each(function () {
             let action = $(this).data('action');
 
             const vote = new Vote(voteArrows);
-            vote.vote(`/posts/${ postId }/${ action }`);
+            vote.vote(`/posts/${ postId }/vote/${ action == 'upvote' ? 1 : -1 }`);
         });
     })
 });

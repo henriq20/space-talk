@@ -1,20 +1,15 @@
-const form = document.getElementById('store-comment-form');
-const storeComment = document.getElementById('store-comment');
+$('.comment .vote-arrows').each(function () {
+    const voteArrows = $(this);
 
-storeComment.addEventListener('click', e => {
-    e.preventDefault();
-    
-    let xhr = new XMLHttpRequest();
-    xhr.open('POST', form.getAttribute('action'), true);
-    xhr.setRequestHeader('Accept', 'application/json');
-    xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
-    xhr.setRequestHeader('X-CSRF-TOKEN', document.querySelector('meta[name="csrf-token"]').content);
+    $(voteArrows).find('button').each(function () {
+        $(this).on('click', e => {
+            e.stopPropagation();
 
-    xhr.onload = function () {
-        if (this.status === 200) {
-            console.log(this.responseText);
-        }
-    };
+            let commentId = $(voteArrows).data('comment-id');
+            let action = $(this).data('action');
 
-    xhr.send(new FormData(form));
+            const vote = new Vote(voteArrows);
+            vote.vote(`/posts/comments/${ commentId }/vote/${ action == 'upvote' ? 1 : -1 }`);
+        });
+    })
 });
